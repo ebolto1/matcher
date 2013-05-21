@@ -67,32 +67,39 @@ while($objects = mysqli_fetch_array($result))
 	} 
 	
 	$result2 = mysqli_query($con,"SELECT * FROM subobject where ID = $objects[objectId]");
- 	$join = mysqli_query($con, 'SELECT * FROM subrelation AS subrelation INNER JOIN subobject AS subobject ON subobject.subId = subrelation.ID ORDER BY subobject.objectName;');
+ 	$join = mysqli_query($con, "SELECT * FROM subrelation AS subrelation INNER JOIN subobject AS subobject ON subobject.subID = subrelation.ID;");
 	$objects = mysqli_query($con,"SELECT * from subobject");
-	while($subs = mysqli_fetch_array($result2) and $obj = mysqli_fetch_array($objects))
+	while($subs = mysqli_fetch_array($result2))
 	{
 		echo "<li>" . $subs['objectName'];
 		echo "<ul>";
 	while ($class = mysqli_fetch_array($join))
-	{
-	if($obj['objectName'] == $class['subName'])
-		echo "<li>" . $class['className']. "</li>"; 
+	{ 
+		
+		if($subs['subID'] == $class['subID'])
+		{
+			
+			echo "<li>" .$class['className']. "</li>"; 
+		}
+		
+		
 	}
 	mysqli_data_seek($join, 0);
 	
 	$doublesub = mysqli_query($con,"SELECT * FROM doublesub where subID = $subs[subID]");
 	$secondobjects = mysqli_query($con,"SELECT * from doublesub");
-	$join2 = mysqli_query($con, 'SELECT * FROM doublerelation AS doublerelation INNER JOIN doublesub AS doublesub ON doublesub.id = doublerelation.ID ORDER BY doublesub.subName;');
-	while($subs2 = mysqli_fetch_array($doublesub) and $dbobj = mysqli_fetch_array($secondobjects))
+	$join2 = mysqli_query($con, "SELECT * FROM doublerelation AS doublerelation INNER JOIN doublesub AS doublesub ON doublesub.id = doublerelation.ID");
+	while($subs2 = mysqli_fetch_array($doublesub))
 	{
 		echo "<li>" . $subs2['subName'];
 		echo "<ul>";
 		while ($classes2 = mysqli_fetch_array($join2))
 		{
-			if($dbobj['subName'] == $classes2['subName'])
+			if($subs2['subName'] == $classes2['subName'])
 				echo "<li>" . $classes2['className']. "</li>";
 		}
-		mysqli_data_seek($join2, 0);
+	mysqli_data_seek($join2, 0);
+		
 		echo "</ul>";
 		echo "</li>";
 	}
@@ -113,7 +120,8 @@ while($objects = mysqli_fetch_array($result))
 <div class = "elements">
 <a href = "deleteClass.php" > Delete Class </a> |
 <a href = "deleteObject.php" > Delete Object </a> |
-<a href = "updateObj.php" > Update Object </a>
+<a href = "updateObj.php" > Update Object </a> |
+<a href = "updateObj2.php" > Update second Subobject </a> |
 </div>
 <script type="text/javascript">
 

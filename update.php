@@ -40,6 +40,6 @@ while($classes = mysqli_fetch_array($query2))
 }
 
 
-header ('Location: index.php');
+header ('Location: updateObj.php');
 ob_flush();
 ?>
