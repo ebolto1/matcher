@@ -31,8 +31,8 @@
 include_once "connect.php";
 
 
-$result = mysqli_query($con,"SELECT * FROM objects");
-
+$result = mysqli_query($con,"SELECT * FROM objects UNION SELECT * from subobject");
+//$result2 = mysqli_query($con,"SELECT * FROM subobject")
 
 echo"<select name = \"objects\">";
 while ($row = mysqli_fetch_array($result))

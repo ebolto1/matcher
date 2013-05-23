@@ -56,7 +56,7 @@ $(document).ready(function() {
 
 include_once "connect.php";
 
-$result = mysqli_query($con,"SELECT * FROM objects");
+$result = mysqli_query($con,"SELECT * FROM objects UNION select * from subobject");
 $query = mysqli_query($con, "Select * from relations");
 
 echo"<select name = \"object\" id = 'objects'>";
