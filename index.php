@@ -1,3 +1,4 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head> <title> </title>
@@ -16,11 +17,14 @@
 
 .elements
 {
-	
-	
-
+	width: 500px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+.table
+{
 	width: 200px;
-	
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -36,7 +40,7 @@
 <a href = "properties.php" > Properties </a> 
 </div>
 <br><br><br><br><br>
-<div class = "elements">
+<div class = "table">
 <a href="javascript:ddtreemenu.flatten('treemenu1', 'expand')">Expand All</a> | <a href="javascript:ddtreemenu.flatten('treemenu1', 'contact')">Collapse All</a>
 <ul id = "treemenu1" class="treeview">
 <?php
@@ -56,7 +60,7 @@ while($objects = mysqli_fetch_array($result))
 	
 	echo "<li>" . $classes['className']."</li>";
 	
-	}
+	} 
 	
 	$result2 = mysqli_query($con,"SELECT * FROM subobject where ID = $objects[objectId]");
 	$result3 = mysqli_query($con, "SELECT * FROM subrelation where ID = $objects[objectId]");
