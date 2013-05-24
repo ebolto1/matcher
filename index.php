@@ -63,20 +63,20 @@ while($objects = mysqli_fetch_array($result))
 	} 
 	
 	$result2 = mysqli_query($con,"SELECT * FROM subobject where ID = $objects[objectId]");
-	$result3 = mysqli_query($con, "SELECT * FROM subrelation where ID = $objects[objectId]");
-	while($subs = mysqli_fetch_array($result2))
+	$join = mysqli_query($con, 'SELECT * FROM subrelation AS subrelation INNER JOIN subobject AS subobject ON subobject.subId = subrelation.ID ORDER BY subobject.objectName;');
+	$objects = mysqli_query($con,"SELECT * from subobject");
+	while($subs = mysqli_fetch_array($result2) and $obj = mysqli_fetch_array($objects))
 	{
 		echo "<li>" . $subs['objectName'];
 		echo "<ul>";
-		while($subs2 = mysqli_fetch_array($result3))
-		{
-		echo "<li>". $subs2['className']. "</li>";
-		}
-		
+	while ($class = mysqli_fetch_array($join))
+	{
+	if($obj['objectName'] == $class['subName'])
+		echo "<li>" . $class['className']. "</li>"; 
+	}
+	mysqli_data_seek($join, 0);
 		echo "</ul>";
 		echo "</li>";
-		
-	
 	}
 	
 	echo "</ul>";
@@ -90,7 +90,7 @@ while($objects = mysqli_fetch_array($result))
 
 <div class = "elements">
 <a href = "deleteClass.php" > Delete Class </a> |
-<a href = "deleteObject.php" > Delete Object </a>
+<a href = "deleteObject.php" > Delete Object </a> |
 <a href = "updateObj.php" > Update Object </a>
 </div>
 <script type="text/javascript">

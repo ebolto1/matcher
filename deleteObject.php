@@ -32,7 +32,7 @@
 include_once "connect.php";
 
 
-$result = mysqli_query($con,"SELECT * FROM objects UNION SELECT * from subobject");
+$result = mysqli_query($con,"SELECT * FROM objects UNION SELECT subobject.ID,subobject.objectName from subobject");
 //$result2 = mysqli_query($con,"SELECT * FROM subobject")
 
 echo"<select name = \"objects\">";
@@ -45,7 +45,7 @@ echo "</select>";
 echo "<br>";
 ?>
 <br>
-<input type ="submit" value = "Delete">
+<input type ="submit" value = "Delete"/>
 </form>
 <font color = "red"> *Warning all Classes under selected Object will be <b>deleted</b>* </font>
 </div>
