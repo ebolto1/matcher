@@ -31,27 +31,28 @@ if (isset($_GET['Message'])) {
 }
 
 ?>
+
+
 <div class = "create">
 <h1> New Classes </h1>
 
 
 <form action="insertclass.php" method="post"> <br>
 <b> Names and description: </b> <br>
-<input type = "text" name ="className1"/>: <input type = "text" size= 100 name ="description1"/> <br> <br>
-<input type = "text" name ="className2"/> : <input type = "text" size= 100 name ="description2"/><br><br>
-<input type = "text" name ="className3"/> : <input type = "text" size= 100 name ="description3"/><br><br>
-<input type = "text" name ="className4"/> : <input type = "text" size= 100 name ="description4"/><br><br>
-<input type = "text" name ="className5"/> : <input type = "text" size= 100 name ="description5"/><br><br>
+<input type = "text" name ="className1"/>: <input type = "text" name ="description1"/> <br> <br>
+<input type = "text" name ="className2"/> : <input type = "text" name ="description2"/><br><br>
+<input type = "text" name ="className3"/> : <input type = "text" name ="description3"/><br><br>
+<input type = "text" name ="className4"/> : <input type = "text" name ="description4"/><br><br>
+<input type = "text" name ="className5"/> : <input type = "text" name ="description5"/><br><br>
 <br>
 <input type ="submit">
 </form>
 
-<font color = "red"> *SPACES ARE NOT SUPPORTED use underscores* </font> <br>
-<a href = "index.php"> Back Home </a>
+<font color = "red"> *SPACES ARE NOT SUPPORTED use underscores* </font>
 </div>
-<div style ="margin-left: auto; margin-right: auto; list-style-type: none; ">
+<div style ="margin-left: auto; margin-right: auto; list-style-type: none;">
 
-
+<a href = "index.php"> Back Home </a>
 
 <table border="1">
 <th> All available classes in the system </th>
@@ -67,7 +68,7 @@ while ($row = mysqli_fetch_array($query))
 {
 	
 	echo "<tr>";
-	echo "<th>". $row['className']. "</th>";
+	echo "<td>". $row['className']. "</td>";
 	echo "<td>". $row['Description']."</td>";
 	echo "</tr>";
 	

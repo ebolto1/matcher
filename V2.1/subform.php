@@ -21,20 +21,33 @@
 
 <body>
 
-<?php 
+<div class = "object">
+<h1> New SubObject </h1>
 
-if (isset($_GET['Message'])) {
-    print '<script type="text/javascript">alert("' . $_GET['Message'] . '");</script>';
+<form action="insertsub.php" method="post">
+
+<b>name:</b> <input type = "text" name ="subName"><br>
+
+<b>associate:</b> 
+<?php
+
+include_once "connect.php";
+
+
+$result = mysqli_query($con,"SELECT * FROM objects");
+
+
+echo"<select name = \"relations\">";
+while ($row = mysqli_fetch_array($result))
+{ 
+echo "<option name=\"relations\" value=\"". $row['objectName']. "\"".">".$row['objectName'] . "</option>";
+
 }
-
+echo "</select>";
+echo "<br>";
 ?>
 
 
-<div class = "object">
-<h1> New Object </h1>
-<form action="insertobject.php" method="post">
-
-<b>name:</b> <input type = "text" name ="objectName"><br>
 <b>Classes: </b> <br><br>
 <?php
 include_once "connect.php";
@@ -50,15 +63,14 @@ if($counter % 5 === 0)
 	echo "<br>";
 	echo "<br>";
 }
-
 }
 
 ?>
 <br>
-<input type ="submit">
+
 <br>
+<input type ="submit">
 </form>
-<a href = "index.php"> Back Home </a>
 </div>
 
 </body>

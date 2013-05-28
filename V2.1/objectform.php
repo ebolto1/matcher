@@ -54,11 +54,9 @@ if($counter % 5 === 0)
 }
 
 ?>
-<br>
 <input type ="submit">
 <br>
 </form>
-<a href = "index.php"> Back Home </a>
 </div>
 
 </body>
