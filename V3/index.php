@@ -16,7 +16,7 @@
 <style>
 body{
 		font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;	/* Font to use */
-		
+		background-color:#E2EBED;
 	}
 .elements
 {
@@ -27,7 +27,7 @@ body{
 }
 .table
 {
-	width: 300px;
+	width: 200px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -40,7 +40,6 @@ body{
 <a href = "classform.php" > Create Class </a> |
 <a href = "objectform.php" > Create Object </a>|
 <a href = "subform.php" > Create SubObject </a> |
-<a href = "subform2.php" > Create Second SubObject </a> |
 <a href = "properties.php" > Properties </a> 
 </div>
 <br><br><br><br><br>
@@ -67,7 +66,7 @@ while($objects = mysqli_fetch_array($result))
 	} 
 	
 	$result2 = mysqli_query($con,"SELECT * FROM subobject where ID = $objects[objectId]");
- 	$join = mysqli_query($con, 'SELECT * FROM subrelation AS subrelation INNER JOIN subobject AS subobject ON subobject.subId = subrelation.ID ORDER BY subobject.objectName;');
+	$join = mysqli_query($con, 'SELECT * FROM subrelation AS subrelation INNER JOIN subobject AS subobject ON subobject.subId = subrelation.ID ORDER BY subobject.objectName;');
 	$objects = mysqli_query($con,"SELECT * from subobject");
 	while($subs = mysqli_fetch_array($result2) and $obj = mysqli_fetch_array($objects))
 	{
@@ -79,31 +78,13 @@ while($objects = mysqli_fetch_array($result))
 		echo "<li>" . $class['className']. "</li>"; 
 	}
 	mysqli_data_seek($join, 0);
-	
-	$doublesub = mysqli_query($con,"SELECT * FROM doublesub where subID = $subs[subID]");
-	$secondobjects = mysqli_query($con,"SELECT * from doublesub");
-	$join2 = mysqli_query($con, 'SELECT * FROM doublerelation AS doublerelation INNER JOIN doublesub AS doublesub ON doublesub.id = doublerelation.ID ORDER BY doublesub.subName;');
-	while($subs2 = mysqli_fetch_array($doublesub) and $dbobj = mysqli_fetch_array($secondobjects))
-	{
-		echo "<li>" . $subs2['subName'];
-		echo "<ul>";
-		while ($classes2 = mysqli_fetch_array($join2))
-		{
-			if($dbobj['subName'] == $classes2['subName'])
-				echo "<li>" . $classes2['className']. "</li>";
-		}
-		mysqli_data_seek($join2, 0);
 		echo "</ul>";
 		echo "</li>";
 	}
-	echo "</ul>";
-	echo "</li>";
 	
-  
-  }
-  echo "</ul>";
+	echo "</ul>";
   echo "</li>";
-}
+  }
 ?>
 </ul>
 
@@ -124,4 +105,5 @@ ddtreemenu.createTree("treemenu2", false)
 
 </script>
 </body>
+
 </html>

@@ -8,7 +8,7 @@ function redirect($Message)
 	header('Location: objectform.php?Message='.urlencode($Message));	
 }
 
-$note = " ";
+$note;
 
 $query = mysqli_query($con,"Select objectId from objects where objectName ='$_POST[objectName]'");
 if(mysqli_num_rows($query) == 0) 
@@ -32,9 +32,9 @@ while($classes = mysqli_fetch_array($query2))
 else
 {
 	$note .= "Object ". $_POST['objectName'] . " has already been added";
+	
 }
-
+$note .= "Added";
 redirect($note);
-
 ob_flush();
 ?>

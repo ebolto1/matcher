@@ -5,16 +5,16 @@ var_dump($_POST);
 
 
 
-$query = mysqli_query($con, "SELECT objectId FROM objects WHERE objectName = '$_POST[relations]'");
+$query = mysqli_query($con, "SELECT subId FROM subobject WHERE objectName = '$_POST[relations]'");
 
 $query = mysqli_fetch_assoc($query);
 
 
 
-$insert = "INSERT INTO subobject (ID,objectName) VALUES ($query[objectId], '$_POST[subName]')";
+$insert = "INSERT INTO doublesub (subID,subName) VALUES ($query[subId], '$_POST[subName]')";
 mysqli_query($con,$insert); 
 
-$lastinsert = mysqli_query($con, "SELECT subID from subobject where subID = LAST_INSERT_ID()");
+$lastinsert = mysqli_query($con, "SELECT id from doublesub where id = LAST_INSERT_ID()");
 $lastinsert = mysqli_fetch_assoc($lastinsert);
 
 //var_dump($lastinsert);
@@ -25,7 +25,7 @@ while($classes = mysqli_fetch_array($query2))
 	$name = "$classes[className]"; 
 	if ("$classes[className]" == "$_POST[$name]")
 	{
-		$insert2 = "Insert into subrelation (ID, className,subName) values ($lastinsert[subID],'$name','$_POST[subName]')";
+		$insert2 = "Insert into doublerelation (ID, className,subName) values ($lastinsert[id],'$name','$_POST[subName]')";
 		mysqli_query($con,$insert2);
 	}
 
